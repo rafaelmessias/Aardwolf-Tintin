@@ -60,7 +60,7 @@
 #CONFIG           {LOG}  {RAW}
 #CONFIG           {PACKET PATCH}  {0.00}
 #CONFIG           {REPEAT CHAR}  {!}
-#CONFIG           {REPEAT ENTER}  {ON}
+#CONFIG           {REPEAT ENTER}  {OFF}
 #CONFIG           {SCROLL LOCK}  {ON}
 #CONFIG           {SPEEDWALK}  {ON}
 #CONFIG           {TINTIN CHAR}  {#}
