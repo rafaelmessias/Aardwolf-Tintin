@@ -26,7 +26,7 @@ tmux set-option status-right "#[fg=brightcyan]Waiting for status..."
 tmux set-option status-left "#[fg=brightcyan]Waiting for status..."
 tmux set-option window-status-fg black
 tmux splitw -h -l 80 'tail -fs .1 $AARD_PATH/Aardwolf-chats'
-tmux splitw -v -l 22 'tail -fs .1 $AARD_PATH/minimap'
+tmux splitw -v -l 21 'tail -fs .1 $AARD_PATH/minimap'
 tmux splitw -h -l 50 'tail -fs .1 $AARD_PATH/chars'
 tmux selectp -t 0
 #tmux splitw -v -l 14 'tail -fs .1 $AARD_PATH/group'
