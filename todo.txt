@@ -25,3 +25,11 @@ Update mapping in gmcp.tin to set room_terrain from GMCP values
 
 Add revised lvladd aliases and fix afind,vfind,rfind,mfind,hfind
 
+Add a warning on startup in case the terminal geometry is incompatible
+ - Maybe fall back to a simpler setup
+
+Make automap optional
+
+Remove local files from version control
+
+Clean panel files on startup
