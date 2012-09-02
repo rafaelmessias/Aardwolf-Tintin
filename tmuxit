@@ -6,6 +6,14 @@
 
 export AARD_PATH=$(pwd)
 
+# Reset all pane files
+echo "Chats" > $AARD_PATH/Aardwolf-chats
+echo "Chars in the Room" > $AARD_PATH/chars
+echo "Minimap" > $AARD_PATH/minimap
+echo "Group Info" > $AARD_PATH/group
+echo "Quest Info" > $AARD_PATH/quest
+echo "Affects" > $AARD_PATH/affects
+
 tmux kill-session -t aardwolf
 tmux new-session -d -s aardwolf -x 170 -y 47 'tt++ -G $AARD_PATH/setup.tin && tmux kill-window'
 tmux set-option quiet on
