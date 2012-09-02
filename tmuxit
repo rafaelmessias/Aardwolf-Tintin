@@ -6,6 +6,14 @@
 
 export AARD_PATH=$(pwd)
 
+# Reset all pane files
+echo "Chats" > $AARD_PATH/Aardwolf-chats
+echo "Chars in the Room" > $AARD_PATH/chars
+echo "Minimap" > $AARD_PATH/minimap
+echo "Group Info" > $AARD_PATH/group
+echo "Quest Info" > $AARD_PATH/quest
+echo "Affects" > $AARD_PATH/affects
+
 tmux kill-session -t aardwolf
 tmux new-session -d -s aardwolf -x 189 -y 47
 tmux splitw -h -l 159 'tail -fs .1 $AARD_PATH/Aardwolf-chats'
