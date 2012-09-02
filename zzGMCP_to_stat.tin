@@ -43,17 +43,20 @@
 		protocol gmcp sendchar
 	};
 	#variable {prompt} {<120>$hp_percent HP <150>| <140>$mana_percent MANA <150>| $movecolor$moves_percent MV};
+	#variable {tmuxprompt} {#[fg=brightgreen]$hp_percent HP #[fg=white]| #[fg=brightblue]$mana_percent MANA #[fg=white]| #[fg=brightyellow]$moves_percent MV};
 	#if {$pos_number == 8}
 	{
 		#variable fighting y;
-		#variable {prompt} {$prompt <150>| <110>Enemy $enemy_hp}
+		#variable {prompt} {$prompt <150>| <110>Enemy $enemy_hp};
+		#variable {tmuxprompt} {$tmuxprompt #[fg=white]| #[fg=brightred]Enemy $enemy_hp};
 	};
 	#else
 	{
 		#variable fighting n
 	};
 	#variable {prompt} {$prompt<099>};
-	#showme {$prompt} {2}
+	#system tmux set-option status-left "$tmuxprompt";
+	#nop #showme {$prompt} {2}
 }
 {5}
 

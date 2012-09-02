@@ -12,13 +12,15 @@
 		{
 			#math ticks {$ticks - 1}
 		};
-		#if {$ticks < 10}
-    		{
-			#show {Tick:<139>  $ticks     <099>QUEST: <139>$quest_timer<099>     Exp:<139> $GMCP[CHAR][STATUS][tnl] \t <099>T/H:[ $thirst / $hunger]   Align:$align} 3
+    #if {$ticks < 10}
+    {
+			#nop #show {Tick:<139>  $ticks     <099>QUEST: <139>$quest_timer<099>     Exp:<139> $GMCP[CHAR][STATUS][tnl] \t <099>T/H:[ $thirst / $hunger]   Align:$align} 3;
+		  #system tmux set-option status-right "Tick: #[fg=brightyellow]$ticks    #[fg=white]QUEST: #[fg=brightyellow]$quest_timer    #[fg=white]Exp: #[fg=brightyellow]$GMCP[CHAR][STATUS][tnl]    #[fg=white]T/H:[ #[fg=brightyellow]$thirst #[fg=white]/ #[fg=brightyellow]$hunger #[fg=white]]    #[fg=white]Align: #[fg=brightyellow]$align";
 		}
 		
 		{
-			#show {Tick:<139> $ticks     <099>QUEST: <139>$quest_timer<099>      Exp:<139> $GMCP[CHAR][STATUS][tnl] \t  <099>T/H:[ $thirst / $hunger ]   Align:$align} 3
+			#nop #show {Tick:<139> $ticks     <099>QUEST: <139>$quest_timer<099>      Exp:<139> $GMCP[CHAR][STATUS][tnl] \t  <099>T/H:[ $thirst / $hunger ]   Align:$align} 3;
+		  #system tmux set-option status-right "Tick: #[fg=brightyellow]$ticks    #[fg=white]QUEST: #[fg=brightyellow]$quest_timer    #[fg=white]Exp: #[fg=brightyellow]$GMCP[CHAR][STATUS][tnl]    #[fg=white]T/H:[ #[fg=brightyellow]$thirst #[fg=white]/ #[fg=brightyellow]$hunger #[fg=white]]    #[fg=white]Align: #[fg=brightyellow]$align";
 		}
 	} {1}
 }
