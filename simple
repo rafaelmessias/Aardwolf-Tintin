@@ -1,0 +1,21 @@
+#!/bin/bash
+
+AARD_PATH=$(pwd)
+
+# Terminal geometry
+GEOMETRY=$(xwininfo -id $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') | grep geometry | awk '{print $2}')
+COLS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $1}')
+ROWS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $2}')
+
+# Reset all pane files
+echo "[CHATS]" > $AARD_PATH/Aardwolf-chats
+echo "[MOBS/CHARS]" > $AARD_PATH/chars
+echo "[MINIMAP]" > $AARD_PATH/minimap
+
+tmux kill-session -t aardwolf
+tmux new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-window'
+tmux splitw -h -l $[COLS-80] 'tail -fs .1 Aardwolf-chats'
+tmux splitw -v -l 21 'tail -fs .1 minimap'
+tmux splitw -h -l $[COLS-110] 'tail -fs .1 chars'
+tmux selectp -t 0
+tmux attach -t aardwolf
