@@ -1,5 +1,4 @@
 #function handle_chat {
-  #show $%0[chan] $%0[msg];
   #var file Aardwolf-chats;
   #if {"$%0[chan]" == "{gtell|tell|ftalk}"} {
     #var file chats-personal
