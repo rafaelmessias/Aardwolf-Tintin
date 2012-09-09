@@ -13,7 +13,8 @@
 #VARIABLE tmuxstatus 1
 
 #READ {$dir/tmux.tin}
-#READ {$dir/gmcp.tin};
+#READ {$dir/chats.tin}
+#READ {$dir/gmcp.tin}
 #READ {$dir/variables.tin}
 #READ {$dir/spellup.tin}
 #READ {$dir/zzGMCP_to_stat.tin}

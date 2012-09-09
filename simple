@@ -8,14 +8,14 @@ COLS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $1}')
 ROWS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $2}')
 
 # Reset all pane files
-echo "[CHATS]" > $AARD_PATH/Aardwolf-chats
-echo "[MOBS/CHARS]" > $AARD_PATH/chars
 echo "[MINIMAP]" > $AARD_PATH/minimap
+echo "[MOBS/CHARS]" > $AARD_PATH/chars
 
 tmux kill-session -t aardwolf
-tmux -q -2 new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-window'
-tmux splitw -h -l $[COLS-80] 'tail -fs .1 Aardwolf-chats'
+tmux -q -2 new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-server'
+tmux splitw -h -l $[COLS-80] 'sh chats.sh'
 tmux splitw -v -l 21 'tail -fs .1 minimap'
 tmux splitw -h -l $[COLS-110] 'tail -fs .1 chars'
-tmux selectp -t 0
+
+tmux selectp -t aardwolf:0.0
 tmux attach -t aardwolf
