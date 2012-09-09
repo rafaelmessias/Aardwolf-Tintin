@@ -1,0 +1,36 @@
+#function tmux_init {
+  #SYSTEM {tmux set-option status-bg black};
+  #SYSTEM {tmux set-option window-status-current-fg black};
+  #SYSTEM {tmux set-option status-left-length 80};
+  #SYSTEM {tmux set-option status-right-length 80};
+  #SYSTEM {tmux set-option status-left "#[fg=brightyellow]Waiting for status..."};
+  #SYSTEM {tmux set-option status-right "#[fg=brightyellow]Waiting for status..."};
+  #SYSTEM {tmux set-option status-fg white};
+  #var result #nop
+}
+
+#function tmux_colors {
+  #var result %0;
+  #replace {result} {<099>} {#[fg=white]};
+  #replace {result} {<139>} {#[fg=brightyellow]};
+  #replace {result} {<130>} {#[fg=brightyellow]};
+  #replace {result} {<120>} {#[fg=brightgreen]};
+  #replace {result} {<150>} {#[fg=brightmagenta]};
+  #replace {result} {<140>} {#[fg=brightblue]};
+  #replace {result} {<110>} {#[fg=brightred]}
+}
+
+#function tmux_status_left {
+  #system {tmux set-option status-left "%0"};
+  #var result #nop
+}
+
+#function tmux_status_right {
+  #system {tmux set-option status-right "%0"};
+  #var result #nop
+}
+
+#function tmux_status_off {
+  #system {tmux set-option status off};
+  #var result #nop
+}

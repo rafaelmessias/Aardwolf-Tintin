@@ -1,0 +1,12 @@
+#function handle_chat {
+  #show $%0[chan] $%0[msg];
+  #var file Aardwolf-chats;
+  #if {"$%0[chan]" == "{gtell|tell|ftalk}"} {
+    #var file chats-personal
+  };
+  #if {"$%0[chan]" == "{auction|barter|marketi}"} {
+    #var file chats-trade
+  };
+  #line log {$dir/$file} {$%0[msg]};
+  #var result #nop
+}

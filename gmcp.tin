@@ -120,7 +120,7 @@
 	#var {player} {$GMCP[COMM][CHATLOGGER][player]};
 	#if {"$GMCP[COMM][CHATLOGGER][chan]" != "mobsay"}
 	{
-		#line log {$dir/Aardwolf-chats} {$GMCP[COMM][CHATLOGGER][msg]};
+		@handle_chat{GMCP[COMM][CHATLOGGER]};
 	};
 	#if {$debug}
 	{
