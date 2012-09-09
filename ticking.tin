@@ -13,13 +13,18 @@
 			#math ticks {$ticks - 1}
 		};
 		#if {$ticks < 10}
-    		{
-			#show {Tick:<139>  $ticks     <099>QUEST: <139>$quest_timer<099>     Exp:<139> $GMCP[CHAR][STATUS][tnl] \t <099>T/H:[ $thirst / $hunger]   Align:$align} 3
+    {
+			#var tickprompt {<099>Tick: <139> $ticks   <099>QUEST: <139>$quest_timer   <099>Exp: <139>$GMCP[CHAR][STATUS][tnl]   <099>T/H:[ $thirst / $hunger ]   Align:$align}
 		}
 		
 		{
-			#show {Tick:<139> $ticks     <099>QUEST: <139>$quest_timer<099>      Exp:<139> $GMCP[CHAR][STATUS][tnl] \t  <099>T/H:[ $thirst / $hunger ]   Align:$align} 3
-		}
+			#var tickprompt {<099>Tick: <139>$ticks   <099>QUEST: <139>$quest_timer   <099>Exp: <139>$GMCP[CHAR][STATUS][tnl]   <099>T/H:[ $thirst / $hunger ]   Align:$align}
+		};
+    #if {$tmuxstatus} {
+      @tmux_status_right{@tmux_colors{$tickprompt}}
+    } {
+      #showme {$tickprompt} {3}
+    }
 	} {1}
 }
 

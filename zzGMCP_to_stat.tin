@@ -37,12 +37,11 @@
 	#variable enemy_hp {$GMCP[CHAR][STATUS][enemypct]};
 	#variable hunger {$GMCP[CHAR][STATUS][hunger]};
 	#variable thirst {$GMCP[CHAR][STATUS][thirst]};
-	#format {movecolor} {%c} {light yellow};
 	#if {$hp_percent == 0.00}
 	{
 		protocol gmcp sendchar
 	};
-	#variable {prompt} {<120>$hp_percent HP <150>| <140>$mana_percent MANA <150>| $movecolor$moves_percent MV};
+	#variable {prompt} {<120>$hp_percent HP <150>| <140>$mana_percent MANA <150>| <130>$moves_percent MV};
 	#if {$pos_number == 8}
 	{
 		#variable fighting y;
@@ -53,7 +52,11 @@
 		#variable fighting n
 	};
 	#variable {prompt} {$prompt<099>};
-	#showme {$prompt} {2}
+	#if {$tmuxstatus} {
+    @tmux_status_left{@tmux_colors{$prompt}}
+  } {
+    #showme {$prompt} {2}
+  }
 }
 {5}
 

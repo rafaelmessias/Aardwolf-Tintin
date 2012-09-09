@@ -13,7 +13,7 @@ echo "[MOBS/CHARS]" > $AARD_PATH/chars
 echo "[MINIMAP]" > $AARD_PATH/minimap
 
 tmux kill-session -t aardwolf
-tmux new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-window'
+tmux -q -2 new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-window'
 tmux splitw -h -l $[COLS-80] 'tail -fs .1 Aardwolf-chats'
 tmux splitw -v -l 21 'tail -fs .1 minimap'
 tmux splitw -h -l $[COLS-110] 'tail -fs .1 chars'

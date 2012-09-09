@@ -23,6 +23,18 @@
 #alias  {opu} {op u;u;close d}
 #alias  {opd} {op d;d;close u}
 
+
+#NOP	#######################
+#NOP	###    Status Bar   ###
+#NOP	#######################
+#IF {$tmuxstatus} {
+  #SPLIT 0 1;
+  @tmux_init{};
+} {
+  #SPLIT 0 4;
+  @tmux_status_off{};
+}
+
 #NOP	#######################
 #nop	### Misc Aliases ###
 #NOP	#######################
