@@ -6,7 +6,7 @@
 
 #LOG APPEND {$dir/active_log.raw}
 
-#VARIABLE {mapping} {1}
+#VARIABLE {mapping} {0}
 #VARIABLE {showmap} {0}
 #VARIABLE {autoscan} {0}
 #VARIABLE {repoptrack} {1}

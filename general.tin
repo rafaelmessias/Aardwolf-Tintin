@@ -4,8 +4,20 @@
 #NOP	/* All channels turned on will be logged to a file. */
 #NOP	/* This section is just for the display in Tintin. */
 
+#VAR gag_next_blank_line 0
+
 #NOP	/* Select which channels to gag from Tintin */
-#ACTION {^\{chan ch={answer|question|wangrp|gossip|barter|auction|mxit|nobletalk|sports|gclan}\}%2$} {#line gag}
+#ACTION {^\{chan ch={answer|question|wangrp|gossip|barter|auction|mxit|nobletalk|sports|gclan}\}%2$} {
+  #line gag;
+  #var gag_next_blank_line 1
+}
+
+#ACTION {^$} {
+  #if {gag_next_blank_line} {
+    #line gag;
+    #var gag_next_blank_line 0
+  }
+}
 
 #NOP	/* Remove the tags from stuff we don't gag */
 #SUB 	{\{chan ch=%*\}} {}
@@ -15,7 +27,7 @@
 #NOP	#######################
 
 #NOP	/* Using these aliases when creating the exits for rooms will enable door opening */
-#ALIAS  {op} {#map exit {%0} command {#send {op %0};%0};#send {open %0}} 
+#NOP #ALIAS  {op} {#map exit {%0} command {#send {op %0};%0};#send {open %0}} 
 #alias  {ope} {op e;e;close w}
 #alias  {opw} {op w;w;close e}
 #alias  {opn} {op n;n;close s}
@@ -86,5 +98,5 @@
 #PATHDIR          {s}  {n}  {4}
 #PATHDIR          {u}  {d}  {16}
 #PATHDIR          {w}  {e}  {8}
-#TICKER           {mapupdate}  {#map write {$dir/map-all.tt}}     {300}
+#NOP #TICKER           {mapupdate}  {#map write {$dir/map-all.tt}}     {300}
 #TICKER 	  {varupdate}  {#class variables write {$dir/variables.tin}} {300}

@@ -1,0 +1,39 @@
+#class affcap kill
+#class affcap open
+
+/*
+	This script will capture spell output, gag it, and put it in a file called 'affects' in your $dir.
+	Todo: have it sort the list and display in descending order from longest duration to shortest
+*/
+
+#action {^You are affected by the following:$} 
+{
+	#line gag;
+	#line log {$dir/affects} {<179>--Affects--<099>}
+}
+
+#action {^Spell   : %1$} 
+{
+	#line gag;
+	#line log {$dir/affects} {%1}
+}
+
+#action {^Skill   : %1$} 
+{
+	#line gag;
+	#line log {$dir/affects} {%1}
+}
+
+#action {^Recovery: %1$}
+{
+	#line gag;
+	#line log {$dir/affects} {R: %1}
+}
+
+#action {^You are affected by %1 %* and %2 %*.$} 
+{
+	#line gag;
+	#line log {$dir/affects} {%1 skill and %2 spell}
+}
+
+#class affcap close

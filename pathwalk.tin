@@ -9,7 +9,7 @@
 #NOP		when you are no longer in a fight and resume walking the path. It also allows you to send commands while
 #NOP		walking a path as opposed to #PATH RUN.
 #NOP	Usage:
-#NOP		1. Store a path somehow (#path load <blah>, #map find <blah>)
+#NOP		1. Store a path somehow (#path load <blah>, #NOP #map find <blah>)
 #NOP		2. Type 'rp'
 #NOP		3. Settings should clear on end of path, use 'rpof' if all else fails.
 #NOP

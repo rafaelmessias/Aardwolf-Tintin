@@ -20,7 +20,7 @@
 {
     #foreach {$portals[]} {x}
     {
-        #map dig {$portals[$x][cmd]} {$portals[$x][vnum]}
+        #NOP #map dig {$portals[$x][cmd]} {$portals[$x][vnum]}
     }
 }
 
@@ -28,7 +28,7 @@
 {
     #foreach {$portals[]} {y}
         {
-            #map unlink {$portals[$y][cmd]}
+            #NOP #map unlink {$portals[$y][cmd]}
         }
 
 }
@@ -39,7 +39,7 @@
     {
         #IF {$tier_level>=$portals[$x][lvl]}
         {
-            #map dig {$portals[$x][cmd]} {$portals[$x][vnum]}
+            #NOP #map dig {$portals[$x][cmd]} {$portals[$x][vnum]}
         }
     }
 }
@@ -50,7 +50,7 @@
     {
         #IF {$tier_level>=$portals[$y][lvl]}
         {
-                #map unlink {$portals[$y][cmd]}
+                #NOP #map unlink {$portals[$y][cmd]}
         }
     }
 
@@ -75,16 +75,16 @@
         {
         	#show <169>Area Find:<099> %1;
             #var checkportal {};
-            #map get roomnote checkportal;
+            #NOP #map get roomnote checkportal;
             #if {"$checkportal"!="noportal"}
             {
                	#var portalsused 1;
                	lvladdportals;
-               	#map find {} {} {} {%1};
+               	#NOP #map find {} {} {} {%1};
 	        };
             #ELSE
             {
-                #map find {} {} {} {%1}
+                #NOP #map find {} {} {} {%1}
             };
             #if {$portalsused}
             {
@@ -111,16 +111,16 @@
         {
         	#show <169>Vnum Find:<099> %1;
             #var checkportal {};
-            #map get roomnote checkportal;
+            #NOP #map get roomnote checkportal;
             #if {"$checkportal"!="noportal"}
             {
             	#var portalsused 1;
                 lvladdportals;
-                #map find {%1}
+                #NOP #map find {%1}
             };
             #else
             {
-	            #map find {%1}
+	            #NOP #map find {%1}
             };
             #if {$portalsused}
             {
@@ -143,16 +143,16 @@
     {
     	#show <169>Room Find:<099> %0;
         #var checkportal {};
-        #map get roomnote checkportal;
+        #NOP #map get roomnote checkportal;
         #if {"$checkportal"!="noportal"}
         {
         	#var portalsused 1;
             lvladdportals;
-            #map find {%0}
+            #NOP #map find {%0}
         };
         #else
         {
-    	    #map find {%0}
+    	    #NOP #map find {%0}
         };
         #if {$portalsused}
         {
@@ -172,7 +172,7 @@
 #ALIAS  mfind
 {
     lvladdportals;
-    #map find %0;
+    #NOP #map find %0;
     #path show;
     lvlclearportals
 }
@@ -184,7 +184,7 @@
 #NOP	###		matching room in the current area.
 #NOP    ###########################################################################
 
-#ALIAS hfind {#map find {%i%*%0%*} {} {} {$GMCP[ROOM][INFO][zone]};#path run}
+#ALIAS hfind {#NOP #map find {%i%*%0%*} {} {} {$GMCP[ROOM][INFO][zone]};#path run}
 
 
 

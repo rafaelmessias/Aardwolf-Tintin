@@ -1,0 +1,14 @@
+#run proxy {perl proxy/proxy.pl}
+#nop
+#nop  INSIDE THE PROXY:
+#nop
+
+#action {^#aard %1$} {#aard %1}
+
+#aard
+#nop
+#nop  BACK TO AARDWOLF:
+#nop
+
+#var proxy_enabled 1
+#showme <128>Ok, proxy started. 

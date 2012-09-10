@@ -1,0 +1,45 @@
+#!/bin/bash
+# This is a Tmux script that handles starting up tintin with all of the Aardwolf settings.
+# You will need to change the -x <column> and -y <row> size
+# Also change 'AARD_PATH' to whatever directory you use for the settings.
+# Requires Tmux 1.5 - See http://theixle.dyndns.org for a download link.
+
+AARD_PATH=$(pwd)
+
+MIN_COLS=140
+MIN_ROWS=35
+
+# Check terminal geometry
+GEOMETRY=$(xwininfo -id $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') | grep geometry | awk '{print $2}')
+COLS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $1}')
+ROWS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $2}')
+if [[ ( $COLS -lt $MIN_COLS ) || ( $ROWS -lt $MIN_ROWS ) ]]; then
+  echo -e "\e[31m*** Oops! ***\e[m Your current terminal geometry is not compatible with this profile."
+  echo -e "The minimum is \e[33m$MIN_COLS x $MIN_ROWS\e[m, but your terminal is \e[33m$COLS x $ROWS\e[m."
+  echo "Try maximizing (or full-screen) and/or changing to a smaller font."
+  exit
+fi
+
+# Reset all pane files
+echo "Chars in the Room" > $AARD_PATH/chars
+echo "Minimap" > $AARD_PATH/minimap
+echo "Group Info" > $AARD_PATH/group
+echo "Quest Info" > $AARD_PATH/quest
+echo "Affects" > $AARD_PATH/affects
+
+tmux kill-server
+# Main Window
+tmux -q -2 new-session -d -s aardwolf -x $COLS -y $ROWS "tail -fs .1 $AARD_PATH/affects"
+# Setup the panes
+tmux splitw -h -l $[$COLS - 30] "tt++ -G $AARD_PATH/setup.tin && tmux kill-server"
+tmux splitw -h -l $[$COLS - 110] "sh $AARD_PATH/chats.sh"
+tmux splitw -v -l 15 "sh chars.sh"
+tmux selectp -t aardwolf:0.0
+tmux splitw -v -l 21 "tail -fs .1 $AARD_PATH/minimap"
+#tmux splitw -v -l 14 'tail -fs .1 $AARD_PATH/group'
+#tmux selectp -t 5
+#tmux splitw -v -l 20 'tail -fs .1 $AARD_PATH/quest'
+#tmux selectp -t 4
+
+tmux selectp -t aardwolf:0.2
+tmux attach-session -t aardwolf

@@ -201,30 +201,30 @@
 	{
 		#if {"$GMCP[ROOM][INFO][details]" != "%*maze%*" && $GMCP[ROOM][INFO][num] != -1}
 		{	
-		    #map goto {$GMCP[ROOM][INFO][num]} {dig};  
-		    #map get roomname {mapresult};       
+		    #NOP #map goto {$GMCP[ROOM][INFO][num]} {dig};  
+		    #NOP #map get roomname {mapresult};       
 			#if {"$mapresult" == "{\d+}"}           
 			{
-				    #map set roomname $GMCP[ROOM][INFO][name];
-				    #map set roomvnum $GMCP[ROOM][INFO][num];
-				    #map set roomarea $GMCP[ROOM][INFO][zone];	                 
-				    #map set roomterrain $GMCP[ROOM][INFO][terrain];
-				    #map set roomcolor <178>                           
+				    #NOP #map set roomname $GMCP[ROOM][INFO][name];
+				    #NOP #map set roomvnum $GMCP[ROOM][INFO][num];
+				    #NOP #map set roomarea $GMCP[ROOM][INFO][zone];	                 
+				    #NOP #map set roomterrain $GMCP[ROOM][INFO][terrain];
+				    #NOP #map set roomcolor <178>                           
 			};
 
 			#foreach {$GMCP[ROOM][INFO][exits][]} {exit}                                         
 			{
-				    #map get {roomexit} {mapresult};
+				    #NOP #map get {roomexit} {mapresult};
 
 				    #if {&mapresult[$exit] == 0}
 				    {                       
-				            #map get {roomvnum} {mapresult} {$GMCP[ROOM][INFO][exits][$exit]};
+				            #NOP #map get {roomvnum} {mapresult} {$GMCP[ROOM][INFO][exits][$exit]};
 
-				            #map dig {$exit} {$GMCP[ROOM][INFO][exits][$exit]};
+				            #NOP #map dig {$exit} {$GMCP[ROOM][INFO][exits][$exit]};
 				                                                       
 				            #if {$mapresult == 0}                         
 				            {                 
-				                    #map set {roomcolor} {<fca>} {$GMCP[ROOM][INFO][exits][$exit]}
+				                    #NOP #map set {roomcolor} {<fca>} {$GMCP[ROOM][INFO][exits][$exit]}
 				            }                                                             
 				    }       
 			}    
@@ -262,20 +262,20 @@
 {
         #if $mapping
 	{
-		#map get roomarea oldarea;
+		#NOP #map get roomarea oldarea;
         	#if {"$oldarea"==""}
         	{
-                	#map set roomarea $GMCP[ROOM][INFO][zone]
+                	#NOP #map set roomarea $GMCP[ROOM][INFO][zone]
         	};
-        	#map get roomterrain oldterrain;
+        	#NOP #map get roomterrain oldterrain;
         	#if {"$oldterrain"==""}
         	{
-                	#map set roomterrain $GMCP[ROOM][INFO][terrain]
+                	#NOP #map set roomterrain $GMCP[ROOM][INFO][terrain]
         	};
-		#map get roomname oldname;
+		#NOP #map get roomname oldname;
                 #if {"$oldname"==""}
                 {
-                        #map set roomname $GMCP[ROOM][INFO][name]
+                        #NOP #map set roomname $GMCP[ROOM][INFO][name]
                 }
 
 	}
@@ -290,7 +290,7 @@
 
 #EVENT  {SESSION DISCONNECTED} 
 {
-	#map write {$dir/map-discon.txt};
+	#NOP #map write {$dir/map-discon.txt};
 	#history write {$dir/history-discon.txt};
 	#class variables write {$dir/variables.tin}
 }
