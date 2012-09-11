@@ -12,14 +12,17 @@
 #VARIABLE {repoptrack} {1}
 #VARIABLE tmuxstatus 1
 
+#READ {$dir/variables.tin}
+#READ {$dir/core/shared.tin}
+#READ {$dir/core/tags.tin}
+#READ {$dir/custom.tin}
+
 #READ {$dir/tmux.tin}
 #READ {$dir/chats.tin}
 #READ {$dir/gmcp.tin}
-#READ {$dir/variables.tin}
 #READ {$dir/spellup.tin}
 #READ {$dir/zzGMCP_to_stat.tin}
 #READ {$dir/general.tin}
-#READ {$dir/map.tin}
 #READ {$dir/ticking.tin}
 #READ {$dir/quest.tin}
 

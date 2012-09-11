@@ -1,0 +1,57 @@
+#CLASS tags KILL
+#CLASS tags OPEN
+
+#NOP Tags
+#NOP ====
+
+#NOP By default, every tagged content will be gagged and logged to 
+#NOP $PANE_PATH/[tag_name]. There are special cases, however; see below.
+
+#NOP Single line tags
+#NOP ----------------
+
+#ACTION {~^\{%*\}%+} {
+  #SUB {^\{%*\}} {};
+  #LINE LOG {$PANE_PATH/%1};
+  #LINE GAG
+} {2}
+
+#NOP Multiple-line tags 
+#NOP ------------------
+
+#NOP The var '$active_tag' is used on 'shared.tin'.
+
+#ACTION {^\{%*\}$} { 
+  #VAR active_tag {%1};
+  @plugin_call{tag_start_${active_tag}};
+  #LINE GAG
+} {2}
+
+#ACTION {^\{/%*\}} {
+  @plugin_call{tag_end_${active_tag}};
+  #UNVAR active_tag;
+  #LINE GAG
+} {1}
+
+#NOP Special Cases
+#NOP -------------
+
+#NOP The minimap tags are different; go figure.
+
+#ACTION {^<MAPSTART>$} {
+	#SHOW \{minimap\};
+	#LINE GAG
+}
+
+#ACTION {^<MAPEND>$} {
+	#SHOW \{/minimap\};
+	#LINE GAG	
+}
+
+#NOP Channel logging is handled by GMCP; we just gag it
+
+#ACTION {^\{chan %*\}} {
+  #LINE GAG
+} {1}
+
+#CLASS tags CLOSE
