@@ -1,5 +1,5 @@
 #!/bin/bash
 
 tmux kill-session -t aardwolf
-tmux -q -2 new-session -d -s aardwolf 'tt++ -G setup.tin && tmux kill-window'
+tmux -q -2 new-session -d -s aardwolf 'tt++ -G core/setup.tin && tmux kill-server'
 tmux attach -t aardwolf
