@@ -293,7 +293,7 @@
 {
 	#NOP #map write {$dir/map-discon.txt};
 	#history write {$dir/history-discon.txt};
-	#class variables write {$dir/variables.tin}
+	#nop #class variables write {$dir/variables.tin}
 }
 
 #EVENT	{SESSION CONNECTED} 
