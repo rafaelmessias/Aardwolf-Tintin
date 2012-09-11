@@ -7,7 +7,7 @@ echo "[MINIMAP]" > $PANE_PATH/minimap
 echo "[ROOMCHARS]" > $PANE_PATH/roomchars
 echo "[CHATS]" > $PANE_PATH/chats
 
-tmux -q -2 new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-server'
+tmux -q -2 new-session -d -s aardwolf 'tt++ -G core/setup.tin; tmux kill-server'
 tmux splitw -h -l $[COLS-80]  "tail -fs .1 $PANE_PATH/chats"
 tmux splitw -v -l 21          "tail -fs .1 $PANE_PATH/minimap"
 tmux splitw -h -l $[COLS-110] "tail -fs .1 $PANE_PATH/roomchars"

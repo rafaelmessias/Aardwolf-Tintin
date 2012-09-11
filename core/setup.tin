@@ -2,28 +2,19 @@
 #VARIABLE {password} {};			# Character password
 #VARIABLE {dir} {.};				# Directory of setings, without '/' or '~' (Ex. /home/user/aardwolf, not ~/aardwolf )
 
-#MAP READ {map-all.tt}				# Once you have a map file, you will read it in here
-
-#LOG APPEND {$dir/active_log.raw}
-
-#VARIABLE {mapping} {0}
-#VARIABLE {showmap} {0}
 #VARIABLE {autoscan} {0}
 #VARIABLE {repoptrack} {1}
 #VARIABLE tmuxstatus 1
 
-#READ {$dir/variables.tin}
+#READ {$dir/core/vars.tin}
 #READ {$dir/core/shared.tin}
 #READ {$dir/core/tags.tin}
 #READ {$dir/custom.tin}
 
 #READ {$dir/tmux.tin}
-#READ {$dir/chats.tin}
 #READ {$dir/gmcp.tin}
-#READ {$dir/spellup.tin}
 #READ {$dir/zzGMCP_to_stat.tin}
 #READ {$dir/general.tin}
 #READ {$dir/ticking.tin}
-#READ {$dir/quest.tin}
 
 #SESSION {aard} {aardmud.org} {4000};
