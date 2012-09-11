@@ -120,7 +120,8 @@
 	#var {player} {$GMCP[COMM][CHATLOGGER][player]};
 	#if {"$GMCP[COMM][CHATLOGGER][chan]" != "mobsay"}
 	{
-		@handle_chat{GMCP[COMM][CHATLOGGER]};
+		#NOP @handle_chat{GMCP[COMM][CHATLOGGER]};
+		#LINE LOG {$PANE_PATH/chats} {$GMCP[COMM][CHATLOGGER][msg]}
 	};
 	#if {$debug}
 	{

@@ -19,3 +19,27 @@
 #macro {\e\e[D} {w}
 #macro {\e\e[6~} {d}
 #macro {\e\e[5~} {u}
+
+#alias {autoscan}
+{
+        #IF {"%0" != ""}
+        {
+                #show <069>Reminder: autoscan doesn't take arguments.<099>
+        };
+        #if {$autoscan == 0}
+        {
+                #var autoscan 1;
+                #show <069>Autoscan: <129>ON<099>
+        };
+        #ELSEIF {$autoscan == 1}
+        {
+                #var autoscan 0;
+                #show <069>Autoscan: <099>Off
+        };
+        #ELSE
+        {
+                #show <069>Something went wrong with the autoscan alias in map.tt<099>
+        }
+}
+
+>>>>>>> master

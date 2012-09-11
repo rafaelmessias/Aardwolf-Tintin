@@ -1,6 +1,9 @@
 #!/bin/bash
 
 AARD_PATH=$(pwd)
+PANE_PATH="/dev/shm/aardwolf"
+mkdir -p $PANE_PATH
+rm -rf $PANE_PATH/*
 
 # Terminal geometry
 GEOMETRY=$(xwininfo -id $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') | grep geometry | awk '{print $2}')
@@ -8,14 +11,17 @@ COLS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $1}')
 ROWS=$(echo $GEOMETRY | awk -F'[x+]+' '{print $2}')
 
 # Reset all pane files
-echo "[MINIMAP]" > $AARD_PATH/minimap
-echo "[MOBS/CHARS]" > $AARD_PATH/chars
+echo "[MINIMAP]" > $PANE_PATH/minimap
+echo "[ROOMCHARS]" > $PANE_PATH/roomchars
+echo "[CHATS]" > $PANE_PATH/chats
 
 tmux kill-session -t aardwolf
 tmux -q -2 new-session -d -s aardwolf 'tt++ -G setup.tin; tmux kill-server'
-tmux splitw -h -l $[COLS-80] 'sh chats.sh'
-tmux splitw -v -l 21 'tail -fs .1 minimap'
-tmux splitw -h -l $[COLS-110] 'tail -fs .1 chars'
+tmux splitw -h -l $[COLS-80]  "tail -fs .1 $PANE_PATH/chats"
+tmux splitw -v -l 21          "tail -fs .1 $PANE_PATH/minimap"
+tmux splitw -h -l $[COLS-110] "tail -fs .1 $PANE_PATH/roomchars"
 
 tmux selectp -t aardwolf:0.0
 tmux attach -t aardwolf
+
+echo "#VAR PANE_PATH {$PANE_PATH}" >> variables.tin

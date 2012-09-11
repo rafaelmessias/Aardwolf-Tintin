@@ -1,0 +1,13 @@
+#ACTION {~%0} {
+	#IF {&active_tag} {
+		#LINE LOG {$PANE_PATH/$active_tag};
+		#LINE GAG
+  }
+} {9999}
+
+#FUNC plugin_call {
+  #VAR call {@%1{}};
+  #IF {$call};
+  #UNVAR call;
+  #RET #NOP
+}
