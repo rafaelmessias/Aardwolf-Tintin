@@ -24,12 +24,14 @@
 #ACTION {^\{%*\}$} { 
   #VAR active_tag {%1};
   @plugin_call{tag_start_${active_tag}};
+  #ACTION {~%*} {#LINE LOG {$PANE_PATH/$active_tag}; #LINE GAG};
   #LINE GAG
 } {2}
 
 #ACTION {^\{/%*\}} {
   @plugin_call{tag_end_${active_tag}};
   #UNVAR active_tag;
+  #UNACT {~%*};
   #LINE GAG
 } {1}
 
