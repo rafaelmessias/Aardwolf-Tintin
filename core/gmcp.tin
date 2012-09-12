@@ -1,0 +1,46 @@
+#CLASS gmcp KILL
+#CLASS gmcp OPEN
+
+#NOP GMCP Message Handling
+#NOP =====================
+
+#FORMAT IAC  %a 255
+#FORMAT DONT %a 254
+#FORMAT DO   %a 253
+#FORMAT WONT %a 252
+#FORMAT WILL %a 251                                                 
+#FORMAT SB   %a 250
+#FORMAT SE   %a 240
+
+#FORMAT GMCP %a 201
+
+#NOP Channel logging
+#NOP ---------------
+
+#EVENT {IAC SB GMCP comm.channel IAC SE} {
+	#VAR {GMCP[COMM][CHANNEL]} {%0};
+  #LINE LOG {$PANE_PATH/chats} {$GMCP[COMM][CHANNEL][msg]}
+}
+
+#NOP Room Info
+#NOP ---------
+
+#EVENT {IAC SB GMCP room.info IAC SE} {
+  #var GMCP[ROOM][INFO] {%0};
+}
+
+#NOP Low-level protocol stuff
+#NOP ------------------------
+
+#EVENT {PROGRAM START} {
+	#VAR CLIENT_NAME %0;
+	#VAR CLIENT_VERSION %1;
+}
+
+#EVENT {IAC WILL GMCP} {
+	#SEND {$IAC$DO$GMCP\};
+	#SEND {$IAC$SB$GMCP Core.Hello { "client": "$CLIENT_NAME", "version": "$CLIENT_VERSION" } $IAC$SE\};
+	#SEND {$IAC$SB$GMCP Core.Supports.Set [ "Room 1", "Char 1", "Core 1", "Comm 1", "Debug 1", "Group 1" ] $IAC$SE\}
+}
+
+#CLASS gmcp CLOSE

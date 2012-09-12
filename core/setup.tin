@@ -1,20 +1,9 @@
-#VARIABLE {name} {};				# Character name
-#VARIABLE {password} {};			# Character password
-#VARIABLE {dir} {.};				# Directory of setings, without '/' or '~' (Ex. /home/user/aardwolf, not ~/aardwolf )
+#READ {core/vars.tin}
+#READ {core/shared.tin}
+#READ {core/gmcp.tin}
+#READ {core/tags.tin}
+#READ {custom.tin}
 
-#VARIABLE {autoscan} {0}
-#VARIABLE {repoptrack} {1}
-#VARIABLE tmuxstatus 1
+#SPLIT 0 1
 
-#READ {$dir/core/vars.tin}
-#READ {$dir/core/shared.tin}
-#READ {$dir/core/tags.tin}
-#READ {$dir/custom.tin}
-
-#READ {$dir/tmux.tin}
-#READ {$dir/gmcp.tin}
-#READ {$dir/zzGMCP_to_stat.tin}
-#READ {$dir/general.tin}
-#READ {$dir/ticking.tin}
-
-#SESSION {aard} {aardmud.org} {4000};
+#SESSION {aard} {aardmud.org} {4010};
