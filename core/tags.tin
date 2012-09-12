@@ -50,10 +50,11 @@
 	#LINE GAG	
 }
 
-#NOP Channel logging is handled by GMCP; we just gag it
+#NOP Channel logging is handled by GMCP; we just gag it (and a blank line)
 
 #ACTION {^\{chan %*\}} {
-  #LINE GAG
+  #LINE GAG;
+  #ACTION {^%s$} {#UNACT {^%s$}; #LINE GAG}
 } {1}
 
 #CLASS tags CLOSE
